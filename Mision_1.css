@@ -1,0 +1,28 @@
+
+body {
+    background-color: #1E1E1E;
+    color: #E0E0E0;
+}
+
+#dirt_piles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 400px;
+    margin: 2rem auto;
+}
+
+.pile{
+    aspect-ratio: 1;
+    background: #885A2B;
+    border-radius: 50% 50% 20% 20%;
+    cursor: pointer;
+}
+.pile.empty{
+    background: #3b2a1a;
+    border-radius: 50%;
+}
+.pile.treasure {
+    background: gold;
+    border-radius: 50%;
+}
