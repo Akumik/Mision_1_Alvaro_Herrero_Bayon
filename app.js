@@ -41,3 +41,8 @@ function dig(pileID, pile){
     }
 }
 
+document.addEventListener("keydown", (event) => {
+    if (event.key === "d") {
+        document.body.classList.toggle("light-mode");
+    }
+});

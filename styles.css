@@ -26,3 +26,17 @@ body {
     background: gold;
     border-radius: 50%;
 }
+
+body.light-mode {
+    background-color: #F5EFE0;
+    color: #2B2118;
+}
+body.light-mode .pile {
+    background: #A9744F;
+}
+body.light-mode .pile.empty {
+    background: #D8CFC0;
+}
+body.light-mode .pile.treasure {
+    background: #E8B923;
+}
