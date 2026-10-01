@@ -42,4 +42,6 @@
 
 
 
-# Autopsia
+# \## Autopsia
+
+# 1. Al principio tenia una clase hecha en css que repetia 9 veces en el html cada uno con un onclick pero luego decidi que el js fuera el que las creara con createElement en el html y les asignara ID's para tener una mayor comodidad a la hora de hacer las modificaciones y es mas esficiente
