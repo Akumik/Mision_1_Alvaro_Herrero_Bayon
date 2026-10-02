@@ -3,6 +3,7 @@ let treasureLocation;
 const nTriesText = document.getElementById("nTries");
 const message = document.getElementById("message");
 const lowestNtriesText = document.getElementById("lowestNtries");
+lowestNtriesText.textContent = "-";
 
 let gameOver = false;
 let nTries = 0;
@@ -24,7 +25,7 @@ initGame();
 function initGame() {
     message.textContent = "Elije un monton a excabar";
     treasureLocation = Math.floor(Math.random() * 9);
-    dirtPiles.innerHTML = "";
+    dirtPiles.replaceChildren();
     for (let i = 0; i < 9; i++) {
         const pile = document.createElement("div");
         pile.classList.add("pile");
@@ -45,13 +46,7 @@ function dig(pileID, pile){
         pile.classList.add("treasure");
         message.textContent = `Encontraste el tesoro en ${nTries} intentos!`;
         gameOver = true;
-        const button = document.createElement("button");
-        button.textContent = "Reiniciar partida";
-        document.body.appendChild(button);
-        button.addEventListener("click", () => {
-            resetGame();
-            button.remove();
-        });
+        createRestartButton();
     }else{
         pile.classList.add("empty");
     }
@@ -74,4 +69,14 @@ function resetGame() {
 
     initGame();
 
+}
+
+function createRestartButton() {
+    const button = document.createElement("button");
+    button.textContent = "Reiniciar partida";
+    document.body.appendChild(button);
+    button.addEventListener("click", () => {
+        resetGame();
+        button.remove();
+    })
 }
