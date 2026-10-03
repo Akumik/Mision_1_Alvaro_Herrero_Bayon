@@ -3,9 +3,8 @@ let treasureLocation;
 const nTriesText = document.getElementById("nTries");
 const message = document.getElementById("message");
 const lowestNtriesText = document.getElementById("lowestNtries");
-const TotalPiles = 9;
-
-lowestNtriesText.textContent = "-";
+const TOTAL_PILES = 9;
+const resetButton = document.getElementById("reset_button");
 
 let gameOver = false;
 let nTries = 0;
@@ -19,22 +18,27 @@ dirtPiles.addEventListener("click", (event) => {
     if (gameOver) {
         return;
     }
-    dig(Number(pile.dataset.index), pile);
+    dig(pile);
 });
 
 document.addEventListener("keydown", (event) => {
-    if (event.key === "d") {
+    if (event.key.toLowerCase() === "d") {
         document.body.classList.toggle("light-mode");
     }
+});
+
+resetButton.addEventListener("click", () => {
+    resetGame();
+    resetButton.hidden = true;
 });
 
 initGame();
 
 function initGame() {
     message.textContent = "Elije un monton a excabar";
-    treasureLocation = Math.floor(Math.random() * TotalPiles);
+    treasureLocation = Math.floor(Math.random() * TOTAL_PILES);
     dirtPiles.replaceChildren();
-    for (let i = 0; i < TotalPiles; i++) {
+    for (let i = 0; i < TOTAL_PILES; i++) {
         const pile = document.createElement("div");
         pile.classList.add("pile");
         pile.dataset.index = i;
@@ -42,20 +46,22 @@ function initGame() {
     }
 }
 
-function dig(pileID, pile){
+function dig(pile){
     
     if(pile.classList.contains("treasure") || pile.classList.contains("empty")){
         return;
     }
     
+    const pileID = Number(pile.dataset.index);
+
     ++nTries;
     nTriesText.textContent = nTries;
 
     if(pileID === treasureLocation){
+        resetButton.hidden = false;
         pile.classList.add("treasure");
         message.textContent = `Encontraste el tesoro en ${nTries} intentos!`;
         gameOver = true;
-        createRestartButton();
     }else{
         pile.classList.add("empty");
     }
@@ -72,14 +78,4 @@ function resetGame() {
 
     initGame();
 
-}
-
-function createRestartButton() {
-    const button = document.createElement("button");
-    button.textContent = "Reiniciar partida";
-    document.body.appendChild(button);
-    button.addEventListener("click", () => {
-        resetGame();
-        button.remove();
-    })
 }
