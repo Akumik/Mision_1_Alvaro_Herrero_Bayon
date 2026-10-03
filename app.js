@@ -3,11 +3,13 @@ let treasureLocation;
 const nTriesText = document.getElementById("nTries");
 const message = document.getElementById("message");
 const lowestNtriesText = document.getElementById("lowestNtries");
+const TotalPiles = 9;
+
 lowestNtriesText.textContent = "-";
 
 let gameOver = false;
 let nTries = 0;
-let lowestNtries = 10;
+let lowestNtries = Infinity;
 
 dirtPiles.addEventListener("click", (event) => {
     const pile = event.target.closest(".pile");
@@ -20,13 +22,19 @@ dirtPiles.addEventListener("click", (event) => {
     dig(Number(pile.dataset.index), pile);
 });
 
+document.addEventListener("keydown", (event) => {
+    if (event.key === "d") {
+        document.body.classList.toggle("light-mode");
+    }
+});
+
 initGame();
 
 function initGame() {
     message.textContent = "Elije un monton a excabar";
-    treasureLocation = Math.floor(Math.random() * 9);
+    treasureLocation = Math.floor(Math.random() * TotalPiles);
     dirtPiles.replaceChildren();
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < TotalPiles; i++) {
         const pile = document.createElement("div");
         pile.classList.add("pile");
         pile.dataset.index = i;
@@ -40,7 +48,8 @@ function dig(pileID, pile){
         return;
     }
     
-    nTriesText.textContent = ++nTries;
+    ++nTries;
+    nTriesText.textContent = nTries;
 
     if(pileID === treasureLocation){
         pile.classList.add("treasure");
@@ -51,12 +60,6 @@ function dig(pileID, pile){
         pile.classList.add("empty");
     }
 }
-
-document.addEventListener("keydown", (event) => {
-    if (event.key === "d") {
-        document.body.classList.toggle("light-mode");
-    }
-});
 
 function resetGame() {
     gameOver = false;
