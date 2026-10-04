@@ -15,22 +15,19 @@ dirtPiles.addEventListener("click", (event) => {
     if(!pile){
         return;
     }
-    if (gameOver) {
-        return;
-    }
     dig(pile);
 });
 
 document.addEventListener("keydown", (event) => {
+    if (event.repeat) {
+        return;
+    }
     if (event.key.toLowerCase() === "d") {
         document.body.classList.toggle("light-mode");
     }
 });
 
-resetButton.addEventListener("click", () => {
-    resetGame();
-    resetButton.hidden = true;
-});
+resetButton.addEventListener("click", resetGame);
 
 initGame();
 
@@ -47,7 +44,9 @@ function initGame() {
 }
 
 function dig(pile){
-    
+    if(gameOver){
+        return;
+    }
     if(pile.classList.contains("treasure") || pile.classList.contains("empty")){
         return;
     }
@@ -58,23 +57,36 @@ function dig(pile){
     nTriesText.textContent = nTries;
 
     if(pileID === treasureLocation){
-        resetButton.hidden = false;
         pile.classList.add("treasure");
         message.textContent = `Encontraste el tesoro en ${nTries} intentos!`;
+        resetButton.hidden = false;
         gameOver = true;
+        updateRecord();
+        revealPiles();
     }else{
         pile.classList.add("empty");
     }
 }
 
+function revealPiles() {
+    dirtPiles.querySelectorAll(".pile").forEach((pile) => {
+        if (!pile.classList.contains("treasure") && !pile.classList.contains("empty")) {
+            pile.classList.add("empty");
+        }
+    });
+}
+
+function updateRecord() {
+    lowestNtries = Math.min(lowestNtries, nTries);
+    lowestNtriesText.textContent = lowestNtries;
+}
+
 function resetGame() {
     gameOver = false;
-    if(lowestNtries > nTries){
-        lowestNtries = nTries;
-    }
     nTries = 0;
     nTriesText.textContent = nTries;
     lowestNtriesText.textContent = lowestNtries;
+    resetButton.hidden = true;
 
     initGame();
 

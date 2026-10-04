@@ -8,42 +8,63 @@
 
 # \## Cómo probarlo
 
-# Abre index.html en el navegador (o con Live Server). Empieza a pulsar 
+# Abre index.html en el navegador (o con Live Server). Empieza a pulsar
 
-# los montones de tierra hasta encontrar el tesoro. Tecla secreta: pulsa "d" para
+# los montones de tierra hasta encontrar el tesoro. Tecla secreta: pulsa
 
-# el modo dia.
+# "d" para el modo día.
 
 # 
 
 # \## Uso de IA
 
+# Usé Claude como ayuda a la hora de implementar ideas y de hacer el CSS
 
+# para que quedara medio bonito.
 
+# 
 
+# Ejemplos de prompts reales: "¿Cómo se usa e implementa createElement
 
+# para crear los elementos que tengo definidos en el CSS?" y "¿Cómo hace
 
+# JavaScript para identificar que has pulsado una tecla específica?"
 
+# 
 
+# Tras un par de subidas a la Arena, añadí los consejos que recomendaba
 
+# el corrector, como que tras ganar apareciera un botón para reiniciar
 
+# la partida.
 
+# 
 
+# El sistema de reinicio e inicio de partida lo hice completamente a
 
-# Usé claude como ayuda a la hora de implementar ideas y de hacer el css para que lo dejara medio bonito.
+# mano. La función `dig` la hice con ayuda de Claude, y los event
 
-# Ejemplo: "Como se usa e implementa para hacer un createElement que cree las clases que tengo en el css?" o "Como se hace para que javascript identifique que has pulsado una tecla especifica?"
+# listeners también los hice con ayuda de la IA para entender cómo
 
-# Tras un par de subidas al arena añadi los consejos que recomendaba el corrector como 
-# que tras ganar apareciera un boton que sirviera para reiniciar partida
+# formatearlos correctamente.
 
-# el sistema de reinicio de partida, y de iniciar partida fue hecho completamente a mano, la funcion de dig fue hecha ayudada por Claude y los event listeners fueron en fueron tambien ayudados por la IA para saber como formatearlos
-
-
-
+# 
 
 # \## Autopsia
 
-# 1. Al principio tenia una clase hecha en css que repetia 9 veces en el html cada uno con un onclick pero luego decidi que el js fuera el que las creara con createElement en el html y les asignara ID's para tener una mayor comodidad a la hora de hacer las modificaciones y es mas esficiente
+# 1\. Al principio tenía la clase `.pile` repetida 9 veces en el HTML,
 
-# 2. resetgame originalmente ejercia toda la logica de resetear partida dentro de si mismo pero fue cambiado para tener una mayor limpieza y eficiencia separando su funcionamiento en otras funciones
+# &#x20;  cada una con su propio `onclick`. Luego decidí que fuera el JS quien
+
+# &#x20;  las creara con `createElement` y les asignara su índice mediante
+
+# &#x20;  `dataset.index`, para tener mayor comodidad a la hora de modificarlas
+
+# &#x20;  y ser más eficiente.
+
+# 2\. `resetGame` originalmente ejercía toda la lógica de reiniciar la
+
+# &#x20;  partida dentro de sí misma, pero lo cambié para tener mayor limpieza
+
+# &#x20;  y eficiencia, separando su funcionamiento en otras funciones.
+
