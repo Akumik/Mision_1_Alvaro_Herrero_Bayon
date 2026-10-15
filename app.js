@@ -70,7 +70,7 @@ function dig(pile){
 
 function revealPiles() {
     dirtPiles.querySelectorAll(".pile").forEach((pile) => {
-        if (!pile.classList.contains("treasure") && !pile.classList.contains("empty")) {
+        if (!pile.classList.contains("treasure") && !pile.classList.contains("empty")) {//
             pile.classList.add("empty");
         }
     });
